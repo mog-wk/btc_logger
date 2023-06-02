@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 # TODO format date in return
 # TODO get 24hrs increment for spec..
 # TODO format spec_info better
-def get_bitcoin_data_coinmarketcap(start_date: datetime.time, trys: int = 10) -> str:
+def get_bitcoin_coinmarketcap(trys: int = 10) -> str:
     # parse content NOTE: url bugs out for unknow reason
     url = "https://coinmarketcap.com/currencies/bitcoin/"
     print(f"Parsing from: {url}")
@@ -48,7 +48,7 @@ def test() -> str:
             )
     print(low, high)
     return "bitcoin price: {} | 24h low: {} | 24h high: {} | date: {}".format(
-            price, low, high, datetime.datetime.now())
+            price, low, high)
 
 
 def get_bitcoin_brl():
@@ -56,5 +56,5 @@ def get_bitcoin_brl():
 
 if __name__ == "__main__":
     print("Hello World")
-    line = get_bitcoin_data_coinmarketcap(datetime.datetime.now())
+    line = get_bitcoin_coinmarketcap()
     print(line)
