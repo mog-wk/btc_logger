@@ -6,31 +6,30 @@ from bs4 import BeautifulSoup
 # TODO format date in return
 # TODO get 24hrs increment for spec..
 # TODO format spec_info better
-def get_bitcoin_coinmarketcap(trys: int = 10) -> str:
+def get_bitcoin_coinmarketcap() -> str:
     # parse content NOTE: url bugs out for unknow reason
     url = "https://coinmarketcap.com/currencies/bitcoin/"
     print(f"Parsing from: {url}")
     # get price data
-    for i in range(trys):
-        for r in range(1):
-            html_resp = requests.get(url, timeout=5)
-            print(f"Status: {html_resp.status_code}\t{'OK' if html_resp.ok else 'Error'}")
 
-            html = BeautifulSoup(html_resp.text, "lxml")
+    html_resp = requests.get(url, timeout=5)
+    print(f"Status: {html_resp.status_code}\t{'OK' if html_resp.ok else 'Error'}")
 
-            info = [stat_block.find("div", class_="statsValue").text for stat_block in html.find_all("div", class_="statsBlock")]
+    html = BeautifulSoup(html_resp.text, "lxml")
 
-            label = ("price", "low", "high", "market_cap", "diluted_market_cap", "volume")
-            data = [
-                    html.find("div", class_="priceValue").text,
-                    html.find("div",class_="sc-aef7b723-0 kIYhSM").find("span",class_="sc-fe06e004-5 jXIGCe").text,
-                    html.find("div",class_="sc-aef7b723-0 gjeJMv").find("span",class_="sc-fe06e004-5 jXIGCe").text,
-                    info[0], info[1], info[2],
-                ]
-            output_str = ""
-            for item in zip(label, data):
-                output_str += "{}: {} | ".format(item[0], item[1])
-            return output_str
+    info = [stat_block.find("div", class_="statsValue").text for stat_block in html.find_all("div", class_="statsBlock")]
+
+    label = ("price", "low", "high", "market_cap", "diluted_market_cap", "volume")
+    data = [
+            html.find("div", class_="priceValue").text,
+            html.find("div",class_="sc-aef7b723-0 kIYhSM").find("span",class_="sc-fe06e004-5 jXIGCe").text,
+            html.find("div",class_="sc-aef7b723-0 gjeJMv").find("span",class_="sc-fe06e004-5 jXIGCe").text,
+            info[0], info[1], info[2],
+        ]
+    output_str = ""
+    for item in zip(label, data):
+        output_str += "{}: {} | ".format(item[0], item[1])
+    return output_str
 
 
 def test() -> str:
