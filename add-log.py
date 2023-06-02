@@ -1,5 +1,4 @@
 import requests
-import datetime
 from bs4 import BeautifulSoup
 
 
@@ -21,12 +20,12 @@ def get_bitcoin_data_coinmarketcap(start_date: datetime.time, trys: int = 10) ->
 
             info = [stat_block.find("div", class_="statsValue").text for stat_block in html.find_all("div", class_="statsBlock")]
 
-            label = ("price", "low", "high", "date", "market_cap", "diluted_market_cap", "volume")
+            label = ("price", "low", "high", "market_cap", "diluted_market_cap", "volume")
             data = [
                     html.find("div", class_="priceValue").text,
                     html.find("div",class_="sc-aef7b723-0 kIYhSM").find("span",class_="sc-fe06e004-5 jXIGCe").text,
                     html.find("div",class_="sc-aef7b723-0 gjeJMv").find("span",class_="sc-fe06e004-5 jXIGCe").text,
-                    datetime.datetime.now(), info[0], info[1], info[2],
+                    info[0], info[1], info[2],
                 ]
             output_str = ""
             for item in zip(label, data):
