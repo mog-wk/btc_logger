@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 def get_bitcoin_coinmarketcap() -> str:
     # parse content NOTE: url bugs out for unknow reason
     url = "https://coinmarketcap.com/currencies/bitcoin/"
-    print(f"Parsing from: {url}")
+    print(f"Parsing from: \"{url}\"")
     # get price data
 
     html_resp = requests.get(url, timeout=5)
@@ -54,6 +54,5 @@ def get_bitcoin_brl():
     pass
 
 if __name__ == "__main__":
-    print("Hello World")
     line = get_bitcoin_coinmarketcap()
     print(line)
