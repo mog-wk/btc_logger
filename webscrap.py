@@ -55,4 +55,9 @@ def get_bitcoin_brl():
 
 if __name__ == "__main__":
     line = get_bitcoin_coinmarketcap()
+    urls = [
+            "https://www.coindesk.com/price/bitcoin/",
+            " www.coinbase.com/price/bitcoin ",
+            "https://markets.businessinsider.com/currencies/btc-usd?op=1",
+            ]
     print(line)

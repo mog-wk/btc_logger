@@ -1,2 +1,2 @@
-11:51.58 6/6/2023 => price: $25,981.56 | low: $25,434.87 | high: $26,810.22 | market_cap: $504,344,955,773 | diluted_market_cap: $546,094,026,100 | volume: $23,005,579,740 | 
-9:35.9 7/6/2023 => price: $26,794.83 | low: $25,442.77 | high: $27,332.18 | market_cap: $519,764,074,419 | diluted_market_cap: $562,766,655,686 | volume: $25,407,464,030 | 
+19 10/6/2023 error: cron_test_error
+19 10/6/2023 error: cron_test_error

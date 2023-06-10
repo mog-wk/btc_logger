@@ -1,4 +1,3 @@
-
 import webscrap as ws
 import log
 import os
@@ -6,7 +5,7 @@ import time
 
 
 def main():
-    retrys = 8
+    retrys = 1
     for i in range(retrys):
         try:
             ws_str: str = ws.get_bitcoin_coinmarketcap()
@@ -17,7 +16,9 @@ def main():
             break
         except AttributeError as e:
             print("Error: {}\nretrying... {} / {}".format(e, i, retrys))
-            time.sleep(8)
+            time.sleep(2)
+
+    log.write_error("cron_test_error",  "logs/test_log.txt")
 
 def test():
     retrys = 8

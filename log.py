@@ -16,12 +16,22 @@ def write_log(b_data: str, path: str, date=None) -> bool:
         line = "{} => {}\n".format(date_log, b_data)
         f.write(line)
 
+    return True
+
 
 def print_log(output_file=None):
     if os.path.exists(output_file):
         with open(output_file, "r") as f:
             for line in f.readlines():
                 print(line, end="")
+
+def write_error(err: str, path: str, date=None):
+    if not date: date = datetime.datetime.now()
+    if os.path.exists(path): log_path = os.path.relpath(path)
+    else: return False
+
+    with open(path, "a") as f:
+        f.write(f"{date.hour} {date.day}/{date.month}/{date.year} error: {err}\n")
 
 
 
