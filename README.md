@@ -5,6 +5,4 @@ TODO:
     make plot with matplotlib
     add more scrappers
     mk print log stuff
-    format time :d02
-    
     
