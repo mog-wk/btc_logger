@@ -1,9 +1,13 @@
+import sys
 import requests
 from bs4 import BeautifulSoup
 
+# parses data from givem crypto sites
+#   cur suppoorted: coin_market_cap
+#   due to diferences in html structure, every website requeres his own function
+
 
 # TODO make date variable for get btc price since date
-# TODO format date in return
 # TODO get 24hrs increment for spec..
 # TODO format spec_info better
 def get_bitcoin_coinmarketcap() -> str:
@@ -32,22 +36,12 @@ def get_bitcoin_coinmarketcap() -> str:
     return output_str
 
 
-def test() -> str:
-    url = "https://coinmarketcap.com/currencies/bitcoin/"
-    html_resp = requests.get(url, timeout=5)
-    print(f"Status: {html_resp.status_code}\t{'OK' if html_resp.ok else 'Error'}")
+def test(url: str) -> str:
+    # test function for convenience
+    if not url:
+        print (f"url for: {__name__} not provided")
+        sys.exit(1)
 
-    html = BeautifulSoup(html_resp.text, "lxml")
-
-    price = html.find("div", class_="sc-8755d3ba-0 cQuGMr coin-stats-header")
-    print(price)
-    low, high = (
-            html.find("div",class_="sc-8755d3ba-0 iausdo"),
-            html.find("div",class_="sc-8755d3ba-0 iausdo tlr"),
-            )
-    print(low, high)
-    return "bitcoin price: {} | 24h low: {} | 24h high: {} | date: {}".format(
-            price, low, high)
 
 
 def get_bitcoin_brl():
