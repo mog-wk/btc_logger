@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 # TODO make date variable for get btc price since date
 # TODO get 24hrs increment for spec..
 # TODO format spec_info better
-def get_bitcoin_coinmarketcap() -> str:
+def get_bitcoin_coinmarketcap() -> tuple:
     # parse content NOTE: url bugs out for unknow reason
     url = "https://coinmarketcap.com/currencies/bitcoin/"
     print(f"Parsing from: \"{url}\"")
@@ -31,9 +31,11 @@ def get_bitcoin_coinmarketcap() -> str:
             info[0], info[1], info[2],
         ]
     output_str = ""
+    output_csv = ""
     for item in zip(label, data):
         output_str += "{}: {} | ".format(item[0], item[1])
-    return output_str
+        output_csv += "{};".format(item[1])
+    return (output_str, output_csv)
 
 
 def test(url: str) -> str:
