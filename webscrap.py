@@ -21,13 +21,13 @@ def get_bitcoin_coinmarketcap() -> tuple:
 
     html = BeautifulSoup(html_resp.text, "lxml")
 
-    info = [stat_block.find("div", class_="statsValue").text for stat_block in html.find_all("div", class_="statsBlock")]
+    info = [stat_block.find("div", class_="statsValue").text[1:] for stat_block in html.find_all("div", class_="statsBlock")]
 
     label = ("price", "low", "high", "market_cap", "diluted_market_cap", "volume")
     data = [
-            html.find("div", class_="priceValue").text,
-            html.find("div",class_="sc-aef7b723-0 kIYhSM").find("span",class_="sc-fe06e004-5 jXIGCe").text,
-            html.find("div",class_="sc-aef7b723-0 gjeJMv").find("span",class_="sc-fe06e004-5 jXIGCe").text,
+            html.find("div", class_="priceValue").text[1:],
+            html.find("div",class_="sc-aef7b723-0 kIYhSM").find("span",class_="sc-fe06e004-5 jXIGCe").text[1:],
+            html.find("div",class_="sc-aef7b723-0 gjeJMv").find("span",class_="sc-fe06e004-5 jXIGCe").text[1:],
             info[0], info[1], info[2],
         ]
     output_str = ""
@@ -56,4 +56,5 @@ if __name__ == "__main__":
             " www.coinbase.com/price/bitcoin ",
             "https://markets.businessinsider.com/currencies/btc-usd?op=1",
             ]
-    print(line)
+    print(line[1])
+
